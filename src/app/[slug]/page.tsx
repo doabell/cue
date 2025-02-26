@@ -30,7 +30,7 @@ export async function generateMetadata({ params }: SeriesPageProps) {
     }
 
     return {
-        title: `${seriesInfo.name} | CUE!`,
+        title: `${seriesInfo.short} | CUE!`,
         description: `View and copy ${seriesInfo.name} color palette in various formats`,
     };
 }
@@ -59,7 +59,13 @@ export default async function SeriesPage({ params }: SeriesPageProps) {
             logo: seriesDataRaw.logo,
         };
 
-        return <ColorSeries data={seriesData} name={seriesInfo.name} />;
+        return (
+            <ColorSeries
+                data={seriesData}
+                name={seriesInfo.name}
+                desc={seriesInfo.desc}
+            />
+        );
     } catch (error) {
         console.error("Error loading series data:", error);
         notFound();

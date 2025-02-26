@@ -8,6 +8,7 @@ export interface Color {
 
 export interface SeriesInfo {
     name: string;
+    short: string;
     slug: string;
     logo?: string;
     desc: string;
@@ -21,6 +22,7 @@ export interface ColorData {
 // Ensure all types are serializable for client components
 export type SerializedSeriesInfo = {
     name: string;
+    short: string;
     slug: string;
     logo?: string;
     desc: string;

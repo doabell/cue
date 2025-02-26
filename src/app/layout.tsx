@@ -1,13 +1,11 @@
 // app/layout.tsx
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Navigation from "@/components/Navigation";
 import { getSeriesList } from "@/lib/jsonParser";
 import { SerializedSeriesInfo } from "./types";
-
-const inter = Inter({ subsets: ["latin"] });
+import { notoSansJP } from "./fonts";
 
 export const metadata: Metadata = {
     title: "CUE!",
@@ -23,6 +21,7 @@ export default function RootLayout({
     const seriesListRaw = getSeriesList();
     const seriesList: SerializedSeriesInfo[] = seriesListRaw.map((series) => ({
         name: series.name,
+        short: series.short,
         slug: series.slug,
         logo: series.logo,
         desc: series.desc,
@@ -32,9 +31,10 @@ export default function RootLayout({
         <html lang="en" suppressHydrationWarning>
             <head>
                 <meta name="color-scheme" content="light dark" />
+                <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎐</text></svg>"></link>
             </head>
             <body
-                className={`${inter.className} bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen`}
+                className={`${notoSansJP.className} bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen`}
             >
                 <ThemeProvider
                     attribute="class"

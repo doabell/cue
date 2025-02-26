@@ -11,8 +11,10 @@ export async function GET() {
         const seriesList: SerializedSeriesInfo[] = seriesListRaw.map(
             (series) => ({
                 name: series.name,
+                short: series.short,
                 slug: series.slug,
                 logo: series.logo,
+                desc: series.desc,
             }),
         );
 

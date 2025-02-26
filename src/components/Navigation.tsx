@@ -32,14 +32,14 @@ export default function Navigation({ seriesList }: NavigationProps) {
                         {seriesList.map((series) => (
                             <Link
                                 key={series.slug}
-                                href={`/series/${series.slug}`}
+                                href={`/${series.slug}`}
                                 className={`px-3 py-2 rounded-md text-sm font-medium capitalize ${
                                     currentSlug === series.slug
                                         ? "bg-gray-900 text-white dark:bg-gray-700"
                                         : "text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700"
                                 }`}
                             >
-                                {series.name}
+                                {series.short}
                             </Link>
                         ))}
                     </div>
@@ -99,7 +99,7 @@ export default function Navigation({ seriesList }: NavigationProps) {
                         {seriesList.map((series) => (
                             <Link
                                 key={series.slug}
-                                href={`/series/${series.slug}`}
+                                href={`/${series.slug}`}
                                 className={`block px-3 py-2 rounded-md text-base font-medium capitalize w-full text-left ${
                                     currentSlug === series.slug
                                         ? "bg-gray-900 text-white dark:bg-gray-700"
@@ -107,7 +107,7 @@ export default function Navigation({ seriesList }: NavigationProps) {
                                 }`}
                                 onClick={() => setIsMenuOpen(false)}
                             >
-                                {series.name}
+                                {series.short}
                             </Link>
                         ))}
                     </div>

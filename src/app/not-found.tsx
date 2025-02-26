@@ -28,8 +28,8 @@ export default function NotFound() {
                     <div className="w-16 h-1 mx-auto my-4 bg-blue-500 dark:bg-blue-400 rounded"></div>
                 </div>
                 <p className="text-gray-600 dark:text-gray-300 mb-8">
-                    The page you are looking for does not exist, or may have been
-                    moved to a different location.
+                    The page you are looking for does not exist, or may have
+                    been moved to a different location.
                 </p>
                 <Link
                     href="/"
