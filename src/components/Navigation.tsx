@@ -17,7 +17,7 @@ export default function Navigation({ seriesList }: NavigationProps) {
     const currentSlug = pathname.split("/").pop() || "";
 
     return (
-        <nav className="bg-white dark:bg-gray-900 py-4 px-6 sticky top-0 z-10 shadow-md mb-8">
+        <nav className="bg-white dark:bg-gray-800 py-4 px-6 sticky top-0 z-10 shadow-md mb-8">
             <div className="max-w-7xl mx-auto flex justify-between items-center">
                 <div className="flex items-center">
                     <Link
@@ -53,7 +53,7 @@ export default function Navigation({ seriesList }: NavigationProps) {
                         href="https://github.com/your-repo"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="ml-4 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-white"
+                        className="ml-4 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 p-2 rounded-full transition-colors w-10 h-10 flex items-center justify-center"
                     >
                         <svg
                             className="w-6 h-6"
@@ -95,7 +95,7 @@ export default function Navigation({ seriesList }: NavigationProps) {
             {/* Mobile Navigation */}
             {isMenuOpen && (
                 <div className="md:hidden mt-4">
-                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                    <div className="px-2 pt-2 pb-3 space-y-1 sm:px=3">
                         {seriesList.map((series) => (
                             <Link
                                 key={series.slug}

@@ -45,7 +45,7 @@ export default function Home() {
                             </h2>
                         </div>
                         <p className="text-gray-600 dark:text-gray-300">
-                            {series.desc} {/* Use desc field */}
+                            {series.desc}
                         </p>
                     </Link>
                 ))}

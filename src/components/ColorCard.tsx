@@ -1,3 +1,4 @@
+// components/ColorCard.tsx
 "use client";
 
 import { useState } from "react";

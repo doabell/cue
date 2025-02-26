@@ -1,5 +1,5 @@
+// components/ColorCode.tsx
 import { firaCode } from "@/app/fonts";
-
 interface ColorCodeProps {
     value: string;
     label: string;
@@ -7,7 +7,6 @@ interface ColorCodeProps {
     handleCopy: (text: string, field: string) => void;
     field: string;
 }
-
 export default function ColorCode({
     value,
     label,
@@ -21,21 +20,22 @@ export default function ColorCode({
                 type="text"
                 readOnly
                 value={value}
-                className={`${firaCode.className} flex-1 min-w-0 rounded-l-md border-0 py-1.5 px-3 text-sm text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700 ring-1 ring-inset ring-gray-300 dark:ring-gray-600`}
+                className={`${firaCode.className} flex-1 min-w-0 rounded-l-md border border-gray-300 dark:border-gray-600 py-1.5 px-3 text-sm text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700`}
                 aria-label={label}
             />
             <button
                 className={`px-3 inline-flex items-center justify-center
-                    flex-shrink-0 w-10 h-10 rounded-r-md border-0
-                    bg-gray-200 text-gray-700 hover:bg-gray-300
-                    dark:bg-gray-600 dark:text-gray-300 dark:hover:bg-gray-500 
-                }`}
+                    flex-shrink-0 rounded-r-md border border-gray-300 dark:border-gray-600 py-1.5
+                    bg-gray-100 hover:bg-gray-200 text-gray-700
+                    dark:bg-gray-700 dark:text-gray-300 dark:hover:bg-gray-600
+                    text-sm
+                `}
                 onClick={() => handleCopy(value, field)}
                 aria-label={`Copy ${label}`}
             >
                 {copiedField === field ? (
                     <svg
-                        className="w-6 h-6"
+                        className="w-5 h-5"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"
@@ -49,7 +49,7 @@ export default function ColorCode({
                     </svg>
                 ) : (
                     <svg
-                        className="w-6 h-6"
+                        className="w-5 h-5"
                         fill="none"
                         viewBox="0 0 24 24"
                         stroke="currentColor"

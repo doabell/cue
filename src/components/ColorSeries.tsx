@@ -1,6 +1,6 @@
 // components/ColorSeries.tsx
 import Image from "next/image";
-import { Color, ColorData } from "@/app/types";
+import { Color } from "@/app/types";
 import ColorCard from "./ColorCard";
 
 interface ColorSeriesProps {
