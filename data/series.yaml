@@ -1,0 +1,13 @@
+series:
+    - name: "Bright"
+      slug: "bright"
+      logo: "/globe.svg"
+      desc: "A vibrant and cheerful color palette. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    - name: "Dark"
+      slug: "dark"
+      logo: "/globe.svg"
+      desc: "A deep and moody color palette. Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+    - name: "Pastel"
+      slug: "pastel"
+      logo: "/globe.svg"
+      desc: "A soft and gentle color palette. Lorem ipsum dolor sit amet, consectetur adipiscing elit."

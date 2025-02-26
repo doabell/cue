@@ -1,0 +1,17 @@
+colors:
+    - title: "Pink"
+      subtitle: "Very Pink"
+      hex: "#F39AAB"
+
+    - title: "Sky Blue"
+      subtitle: "Vibrant Blue"
+      hex: "#87CEEB"
+      logo: "/globe.svg"
+    - title: "Lime Green"
+      subtitle: "Fresh Green"
+      hex: "#32CD32"
+      logo: "/globe.svg"
+    - title: "Sunny Yellow"
+      subtitle: "Bright Yellow"
+      hex: "#FFD700"
+      logo: "/globe.svg"
