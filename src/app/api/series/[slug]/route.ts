@@ -3,13 +3,11 @@ import { NextResponse } from "next/server";
 import { getSeriesData } from "@/lib/jsonParser";
 import { Color } from "@/app/types";
 
-export async function GET(
-    request: Request,
-) {
+export async function GET(request: Request) {
     try {
         // Extract the slug from the URL
         const url = new URL(request.url);
-        const slug = url.pathname.split('/').pop();
+        const slug = url.pathname.split("/").pop();
         if (!slug) throw new Error("Slug not found");
 
         const seriesDataRaw = getSeriesData(slug);
@@ -27,10 +25,7 @@ export async function GET(
 
         return NextResponse.json(seriesData);
     } catch (error) {
-        console.error(
-            `Error fetching series data:`,
-            error,
-        );
+        console.error(`Error fetching series data:`, error);
 
         // If file not found, return 404
         if ((error as Error).message.includes("not found")) {
