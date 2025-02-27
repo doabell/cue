@@ -24,6 +24,6 @@ Claude Code was at capacity, so I could not join.
 
 ### Legacy version
 
-https://img.shields.io/badge/Built%20with-GPT%203.5-412991?style=for-the-badge&logo=openai
+![Built with GPT 3.5](https://img.shields.io/badge/Built%20with-GPT%203.5-412991?style=for-the-badge&logo=openai)
 
 A previous version, made with GPT 3.5 (ChatGPT), is available at <https://cue.doabell.com/legacy>.
