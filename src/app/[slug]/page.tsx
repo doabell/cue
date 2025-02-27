@@ -5,9 +5,9 @@ import ColorSeries from "@/components/ColorSeries";
 import { Color } from "@/app/types";
 
 interface SeriesPageProps {
-    params: {
+    params: Promise<{
         slug: string;
-    };
+    }>;
 }
 
 export async function generateStaticParams() {

@@ -43,7 +43,7 @@ export default function ColorCard({ color }: ColorCardProps) {
                                     alt={`${title} logo`}
                                     width={48}
                                     height={48}
-                                    className="rounded-full"
+                                    className="rounded-full self-center"
                                 />
                             </div>
                         )}

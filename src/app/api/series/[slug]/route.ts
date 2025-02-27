@@ -5,11 +5,13 @@ import { Color } from "@/app/types";
 
 export async function GET(
     request: Request,
-    { params }: { params: { slug: string } },
 ) {
     try {
-        // Await the params object
-        const { slug } = await Promise.resolve(params);
+        // Extract the slug from the URL
+        const url = new URL(request.url);
+        const slug = url.pathname.split('/').pop();
+        if (!slug) throw new Error("Slug not found");
+
         const seriesDataRaw = getSeriesData(slug);
 
         // Serialize the data to avoid symbol properties
@@ -26,7 +28,7 @@ export async function GET(
         return NextResponse.json(seriesData);
     } catch (error) {
         console.error(
-            `Error fetching series data for ${await Promise.resolve(params).then((p) => p.slug)}:`,
+            `Error fetching series data:`,
             error,
         );
 

@@ -24,7 +24,7 @@ export default function ColorSeries({ data, name, desc }: ColorSeriesProps) {
                         alt={`${name} series logo`}
                         width={50}
                         height={50}
-                        className="mr-4 self-start"
+                        className="mr-4 self-center"
                         style={{ height: "auto" }}
                     />
                 )}

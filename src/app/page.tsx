@@ -37,7 +37,7 @@ export default function Home() {
                                     alt={`${series.name} logo`}
                                     width={50}
                                     height={50}
-                                    className="mr-3"
+                                    className="mr-3 self-center"
                                 />
                             )}
                             <h2 className="text-xl font-semibold capitalize">
