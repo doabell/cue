@@ -50,7 +50,7 @@ export default function Navigation({ seriesList }: NavigationProps) {
 
                     {/* GitHub Icon */}
                     <a
-                        href="https://github.com/your-repo"
+                        href="https://github.com/doabell/cue"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="ml-4 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600 p-2 rounded-full transition-colors w-10 h-10 flex items-center justify-center"
