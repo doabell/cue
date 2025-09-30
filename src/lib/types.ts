@@ -1,4 +1,3 @@
-// app/types.ts
 export interface Color {
     title: string;
     subtitle: string;
@@ -19,7 +18,6 @@ export interface ColorData {
     logo?: string;
 }
 
-// Ensure all types are serializable for client components
 export type SerializedSeriesInfo = {
     name: string;
     short: string;

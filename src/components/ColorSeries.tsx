@@ -1,6 +1,5 @@
 // components/ColorSeries.tsx
-import Image from "next/image";
-import { Color } from "@/app/types";
+import type { Color } from "@/lib/types";
 import ColorCard from "./ColorCard";
 
 interface ColorSeriesProps {
@@ -19,13 +18,14 @@ export default function ColorSeries({ data, name, desc }: ColorSeriesProps) {
         <section className="mb-12">
             <div className="flex items-start mb-6">
                 {logo && (
-                    <Image
+                    <img
                         src={logo}
                         alt={`${name} series logo`}
                         width={50}
                         height={50}
                         className="mr-4 self-center"
                         style={{ height: "auto" }}
+                        loading="lazy"
                     />
                 )}
                 <div>

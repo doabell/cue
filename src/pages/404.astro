@@ -1,0 +1,32 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { getSeriesList } from "@/lib/jsonParser";
+import type { SerializedSeriesInfo } from "@/lib/types";
+
+const seriesListRaw = getSeriesList();
+const seriesList: SerializedSeriesInfo[] = seriesListRaw.map((series) => ({
+    name: series.name,
+    short: series.short,
+    slug: series.slug,
+    logo: series.logo,
+    desc: series.desc,
+}));
+---
+<BaseLayout
+    seriesList={seriesList}
+    title="Series Not Found | CUE!"
+    description="The requested series could not be located."
+>
+    <section class="py-16 text-center">
+        <h1 class="text-4xl font-bold mb-4">404 - Not Found</h1>
+        <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+            We couldn't find the page you were looking for. Please use the navigation above to explore the available series.
+        </p>
+        <a
+            href="/"
+            class="inline-block px-6 py-3 bg-gray-900 dark:bg-gray-700 text-white rounded-md hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors"
+        >
+            Return Home
+        </a>
+    </section>
+</BaseLayout>

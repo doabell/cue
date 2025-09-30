@@ -1,38 +1,38 @@
 // components/Navigation.tsx
-"use client";
-
 import { useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import DarkModeToggle from "./DarkModeToggle";
-import { SerializedSeriesInfo } from "@/app/types";
+import type { SerializedSeriesInfo } from "@/lib/types";
 
 interface NavigationProps {
     seriesList: SerializedSeriesInfo[];
+    currentSlug?: string;
 }
 
-export default function Navigation({ seriesList }: NavigationProps) {
+export default function Navigation({
+    seriesList,
+    currentSlug = "",
+}: NavigationProps) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const pathname = usePathname();
-    const currentSlug = pathname.split("/").pop() || "";
+
+    const buildSeriesHref = (slug: string) => `/${slug}`;
 
     return (
         <nav className="bg-white dark:bg-gray-800 py-4 px-6 sticky top-0 z-10 shadow-md mb-8">
             <div className="max-w-7xl mx-auto flex justify-between items-center">
                 <div className="flex items-center">
-                    <Link
+                    <a
                         href="/"
                         className="text-xl font-bold text-gray-900 dark:text-white mr-8"
                     >
                         CUE!
-                    </Link>
+                    </a>
 
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex space-x-4">
                         {seriesList.map((series) => (
-                            <Link
+                            <a
                                 key={series.slug}
-                                href={`/${series.slug}`}
+                                href={buildSeriesHref(series.slug)}
                                 className={`px-3 py-2 rounded-md text-sm font-medium capitalize ${
                                     currentSlug === series.slug
                                         ? "bg-gray-900 text-white dark:bg-gray-700"
@@ -40,7 +40,7 @@ export default function Navigation({ seriesList }: NavigationProps) {
                                 }`}
                             >
                                 {series.short}
-                            </Link>
+                            </a>
                         ))}
                     </div>
                 </div>
@@ -97,9 +97,9 @@ export default function Navigation({ seriesList }: NavigationProps) {
                 <div className="md:hidden mt-4">
                     <div className="px-2 pt-2 pb-3 space-y-1 sm:px=3">
                         {seriesList.map((series) => (
-                            <Link
+                            <a
                                 key={series.slug}
-                                href={`/${series.slug}`}
+                                href={buildSeriesHref(series.slug)}
                                 className={`block px-3 py-2 rounded-md text-base font-medium capitalize w-full text-left ${
                                     currentSlug === series.slug
                                         ? "bg-gray-900 text-white dark:bg-gray-700"
@@ -108,7 +108,7 @@ export default function Navigation({ seriesList }: NavigationProps) {
                                 onClick={() => setIsMenuOpen(false)}
                             >
                                 {series.short}
-                            </Link>
+                            </a>
                         ))}
                     </div>
                 </div>

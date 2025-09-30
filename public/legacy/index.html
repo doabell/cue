@@ -1,115 +1,151 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<!-- Courtesy of ChatGPT 3.5 -->
+    <!-- Courtesy of ChatGPT 3.5 -->
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon"
-    href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎐</text></svg>">
-  <title>CUE! color palette</title>
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Fira+Sans:wght@400;700&family=Fira+Code:wght@400;700&display=swap">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <style>
-    @media (min-width: 1200px) {
-      .container {
-        max-width: 1400px;
-      }
-    }
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="icon"
+            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎐</text></svg>"
+        />
+        <title>CUE! color palette</title>
+        <link
+            rel="stylesheet"
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Fira+Sans:wght@400;700&family=Fira+Code:wght@400;700&display=swap"
+        />
+        <link
+            rel="stylesheet"
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        />
+        <style>
+            @media (min-width: 1200px) {
+                .container {
+                    max-width: 1400px;
+                }
+            }
 
-    body {
-      background-color: #333;
-      color: #fff;
-      font-family: 'Fira Sans', 'Noto Sans JP', sans-serif;
-    }
+            body {
+                background-color: #333;
+                color: #fff;
+                font-family: "Fira Sans", "Noto Sans JP", sans-serif;
+            }
 
-    .color-box {
-      width: 100%;
-      height: 100%;
-      border-radius: 10px;
-    }
+            .color-box {
+                width: 100%;
+                height: 100%;
+                border-radius: 10px;
+            }
 
-    .color-card {
-      border-radius: 15px;
-      background-color: #444;
-    }
+            .color-card {
+                border-radius: 15px;
+                background-color: #444;
+            }
 
-    .color-info {
-      font-size: 14px;
-    }
+            .color-info {
+                font-size: 14px;
+            }
 
-    .color-name {
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
+            .color-name {
+                font-size: 20px;
+                font-weight: bold;
+                margin-bottom: 5px;
+            }
 
-    .color-text {
-      font-size: 16px;
-      margin-bottom: 5px;
-    }
+            .color-text {
+                font-size: 16px;
+                margin-bottom: 5px;
+            }
 
-    .color-input-group {
-      position: relative;
-      margin-bottom: 10px;
-      font-family: 'Fira Code', monospace;
-    }
+            .color-input-group {
+                position: relative;
+                margin-bottom: 10px;
+                font-family: "Fira Code", monospace;
+            }
 
-    .color-input {
-      color: #fff;
-      border: none;
-    }
+            .color-input {
+                color: #fff;
+                border: none;
+            }
 
-    .color-input::placeholder {
-      color: #ccc;
-    }
+            .color-input::placeholder {
+                color: #ccc;
+            }
 
-    /* Retain text color for hex values on focus */
-    .color-input:focus {
-      color: #fff;
-    }
-  </style>
-</head>
+            /* Retain text color for hex values on focus */
+            .color-input:focus {
+                color: #fff;
+            }
+        </style>
+    </head>
 
-<body>
+    <body>
+        <div class="container">
+            <h1 class="text-center my-4">
+                Color palette for <a href="https://cue-liber.jp/">CUE!</a>
+            </h1>
+            <div class="row" id="colorGrid">
+                <!-- Colors will be dynamically generated here -->
+            </div>
+        </div>
 
-  <div class="container">
-    <h1 class="text-center my-4">Color palette for <a href="https://cue-liber.jp/">CUE!</a></h1>
-    <div class="row" id="colorGrid">
-      <!-- Colors will be dynamically generated here -->
-    </div>
-  </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const colors = [
+                    {
+                        title: "内山悠里菜",
+                        text: "as 六石陽菜",
+                        hex: "#F39AAB",
+                    },
+                    { title: "稗田寧々", text: "as 鷹取舞花", hex: "#FFD93C" },
+                    { title: "守屋亨香", text: "as 鹿野志穂", hex: "#CFD10C" },
+                    {
+                        title: "緒方佑奈",
+                        text: "as 月居ほのか",
+                        hex: "#15ADDC",
+                    },
+                    { title: "鷹村彩花", text: "as 天童悠希", hex: "#FF9700" },
+                    { title: "宮原颯希", text: "as 赤川千紗", hex: "#F15183" },
+                    {
+                        title: "飯塚麻結",
+                        text: "as 恵庭あいり",
+                        hex: "#70CEEF",
+                    },
+                    {
+                        title: "村上まなつ",
+                        text: "as 九条柚葉",
+                        hex: "#A269A8",
+                    },
+                    {
+                        title: "安齋由香里",
+                        text: "as 夜峰美晴",
+                        hex: "#64B891",
+                    },
+                    { title: "松田彩希", text: "as 神室絢", hex: "#00AAD6" },
+                    { title: "山口愛", text: "as 宮路まほろ", hex: "#F08687" },
+                    {
+                        title: "鶴野有紗",
+                        text: "as 日名倉莉子",
+                        hex: "#F79469",
+                    },
+                    { title: "立花日菜", text: "as 丸山利恵", hex: "#D00026" },
+                    {
+                        title: "小峯愛未",
+                        text: "as 宇津木聡里",
+                        hex: "#004F90",
+                    },
+                    { title: "佐藤舞", text: "as 明神凛音", hex: "#FFAF00" },
+                    { title: "土屋李央", text: "as 遠見鳴", hex: "#AC0061" },
+                ];
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      const colors = [
-        { title: '内山悠里菜', text: 'as 六石陽菜', hex: '#F39AAB' },
-        { title: '稗田寧々', text: 'as 鷹取舞花', hex: '#FFD93C' },
-        { title: '守屋亨香', text: 'as 鹿野志穂', hex: '#CFD10C' },
-        { title: '緒方佑奈', text: 'as 月居ほのか', hex: '#15ADDC' },
-        { title: '鷹村彩花', text: 'as 天童悠希', hex: '#FF9700' },
-        { title: '宮原颯希', text: 'as 赤川千紗', hex: '#F15183' },
-        { title: '飯塚麻結', text: 'as 恵庭あいり', hex: '#70CEEF' },
-        { title: '村上まなつ', text: 'as 九条柚葉', hex: '#A269A8' },
-        { title: '安齋由香里', text: 'as 夜峰美晴', hex: '#64B891' },
-        { title: '松田彩希', text: 'as 神室絢', hex: '#00AAD6' },
-        { title: '山口愛', text: 'as 宮路まほろ', hex: '#F08687' },
-        { title: '鶴野有紗', text: 'as 日名倉莉子', hex: '#F79469' },
-        { title: '立花日菜', text: 'as 丸山利恵', hex: '#D00026' },
-        { title: '小峯愛未', text: 'as 宇津木聡里', hex: '#004F90' },
-        { title: '佐藤舞', text: 'as 明神凛音', hex: '#FFAF00' },
-        { title: '土屋李央', text: 'as 遠見鳴', hex: '#AC0061' },
-      ];
+                const colorGrid = document.getElementById("colorGrid");
 
-      const colorGrid = document.getElementById('colorGrid');
+                colors.forEach((color) => {
+                    const colorBox = document.createElement("div");
+                    colorBox.classList.add("col-xl-3", "col-md-6", "mb-4");
 
-      colors.forEach(color => {
-        const colorBox = document.createElement('div');
-        colorBox.classList.add('col-xl-3', 'col-md-6', 'mb-4');
-
-        colorBox.innerHTML = `
+                    colorBox.innerHTML = `
         <div class="card color-card">
           <div class="card-body text-center">
             <div class="color-box mb-3" style="background-color: ${color.hex}; border-radius: 10px; height: 150px;"></div>
@@ -125,8 +161,8 @@
 
             <div class="color-input-group">
               <div class="input-group">
-                <input class="form-control color-input bg-dark" type="text" value="rgb(${hexToRgb(color.hex).join(', ')})" readonly aria-label="RGB Value">
-                <button class="btn btn-dark copy-button" data-clipboard-text="rgb(${hexToRgb(color.hex).join(', ')})" aria-label="Copy RGB Value">📋</button>
+                <input class="form-control color-input bg-dark" type="text" value="rgb(${hexToRgb(color.hex).join(", ")})" readonly aria-label="RGB Value">
+                <button class="btn btn-dark copy-button" data-clipboard-text="rgb(${hexToRgb(color.hex).join(", ")})" aria-label="Copy RGB Value">📋</button>
               </div>
             </div>
 
@@ -142,40 +178,41 @@
         </div>
       `;
 
-        colorGrid.appendChild(colorBox);
-      });
+                    colorGrid.appendChild(colorBox);
+                });
 
-      function hexToRgb(hex) {
-        const bigint = parseInt(hex.substring(1), 16);
-        const r = (bigint >> 16) & 255;
-        const g = (bigint >> 8) & 255;
-        const b = bigint & 255;
-        return [r, g, b];
-      }
+                function hexToRgb(hex) {
+                    const bigint = parseInt(hex.substring(1), 16);
+                    const r = (bigint >> 16) & 255;
+                    const g = (bigint >> 8) & 255;
+                    const b = bigint & 255;
+                    return [r, g, b];
+                }
 
-      function hexToAss(hex) {
-        // #F39AAB -> &HAB9AF3&
-        const r = hex.substring(1, 3);
-        const g = hex.substring(3, 5);
-        const b = hex.substring(5, 7);
-        return `&H${b}${g}${r}&`;
-      }
+                function hexToAss(hex) {
+                    // #F39AAB -> &HAB9AF3&
+                    const r = hex.substring(1, 3);
+                    const g = hex.substring(3, 5);
+                    const b = hex.substring(5, 7);
+                    return `&H${b}${g}${r}&`;
+                }
 
-      const clipboard = new ClipboardJS('.copy-button');
+                const clipboard = new ClipboardJS(".copy-button");
 
-      clipboard.on('success', function (e) {
-        e.clearSelection();
-        e.trigger.textContent = '✅';
-        setTimeout(function () {
-          e.trigger.textContent = '📋';
-        }, 2000);
-      });
+                clipboard.on("success", function (e) {
+                    e.clearSelection();
+                    e.trigger.textContent = "✅";
+                    setTimeout(function () {
+                        e.trigger.textContent = "📋";
+                    }, 2000);
+                });
 
-      clipboard.on('error', function (e) {
-        alert('Copy failed. Please try selecting the text and copying manually.');
-      });
-    });
-  </script>
-</body>
-
+                clipboard.on("error", function (e) {
+                    alert(
+                        "Copy failed. Please try selecting the text and copying manually.",
+                    );
+                });
+            });
+        </script>
+    </body>
 </html>

@@ -1,0 +1,80 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import ColorSeries from "@/components/ColorSeries";
+import { getSeriesData, getSeriesList } from "@/lib/jsonParser";
+import type { Color, SerializedSeriesInfo } from "@/lib/types";
+
+export const prerender = true;
+
+export const getStaticPaths = async () => {
+    const seriesList = getSeriesList();
+    return seriesList.map((series) => ({
+        params: { slug: series.slug },
+    }));
+};
+
+const { slug } = Astro.params;
+
+const seriesListRaw = getSeriesList();
+const seriesList: SerializedSeriesInfo[] = seriesListRaw.map((series) => ({
+    name: series.name,
+    short: series.short,
+    slug: series.slug,
+    logo: series.logo,
+    desc: series.desc,
+}));
+
+const seriesInfo = seriesListRaw.find((series) => series.slug === slug);
+
+if (!seriesInfo) {
+    Astro.response.status = 404;
+}
+
+const seriesData = seriesInfo
+    ? (() => {
+          const data = getSeriesData(seriesInfo.slug);
+          return {
+              colors: data.colors.map((color: Color) => ({
+                  title: color.title,
+                  subtitle: color.subtitle,
+                  hex: color.hex,
+                  logo: color.logo,
+              })),
+              logo: data.logo,
+          };
+      })()
+    : null;
+
+const pageTitle = seriesInfo ? `${seriesInfo.short} | CUE!` : "Series Not Found";
+const pageDescription = seriesInfo
+    ? `View and copy ${seriesInfo.name} color palette in various formats`
+    : "We couldn't find that series.";
+---
+<BaseLayout
+    seriesList={seriesList}
+    title={pageTitle}
+    description={pageDescription}
+    currentSlug={seriesInfo ? seriesInfo.slug : ""}
+>
+    {seriesInfo && seriesData ? (
+        <ColorSeries
+            client:load
+            data={seriesData}
+            name={seriesInfo.name}
+            desc={seriesInfo.desc}
+        />
+    ) : (
+        <section class="py-16 text-center">
+            <h1 class="text-3xl font-bold mb-4">Series Not Found</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+                We couldn't find the requested series. Please choose another from the list above.
+            </p>
+            <a
+                href="/"
+                class="inline-block px-6 py-3 bg-gray-900 dark:bg-gray-700 text-white rounded-md hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors"
+            >
+                Return Home
+            </a>
+        </section>
+    )}
+</BaseLayout>

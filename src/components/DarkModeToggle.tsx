@@ -1,28 +1,76 @@
 // components/DarkModeToggle.tsx
-"use client";
+import { useEffect, useState } from "react";
 
-import { useState, useEffect } from "react";
-import { useTheme } from "next-themes";
+type Theme = "light" | "dark";
+
+const STORAGE_KEY = "theme";
+
+const getInitialTheme = (): Theme => {
+    if (typeof window === "undefined") {
+        return "light";
+    }
+
+    const stored = window.localStorage.getItem(STORAGE_KEY);
+    if (stored === "light" || stored === "dark") {
+        return stored;
+    }
+
+    const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+    ).matches;
+    return prefersDark ? "dark" : "light";
+};
 
 export default function DarkModeToggle() {
-    const [mounted, setMounted] = useState(false);
-    const { resolvedTheme, setTheme } = useTheme();
+    const [theme, setTheme] = useState<Theme>(() => getInitialTheme());
 
-    // Avoid hydration mismatch
-    useEffect(() => setMounted(true), []);
+    useEffect(() => {
+        if (typeof document === "undefined") {
+            return;
+        }
 
-    if (!mounted) return null;
+        const root = document.documentElement;
+        root.classList.remove(theme === "dark" ? "light" : "dark");
+        root.classList.add(theme);
+
+        if (theme === "dark") {
+            root.classList.add("dark");
+        } else {
+            root.classList.remove("dark");
+        }
+
+        window.localStorage.setItem(STORAGE_KEY, theme);
+    }, [theme]);
+
+    useEffect(() => {
+        if (typeof window === "undefined") {
+            return;
+        }
+
+        const media = window.matchMedia("(prefers-color-scheme: dark)");
+        const handler = (event: MediaQueryListEvent) => {
+            const stored = window.localStorage.getItem(STORAGE_KEY);
+            if (stored === "light" || stored === "dark") {
+                return;
+            }
+            setTheme(event.matches ? "dark" : "light");
+        };
+
+        media.addEventListener("change", handler);
+        return () => media.removeEventListener("change", handler);
+    }, []);
+
+    const toggleTheme = () => {
+        setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+    };
 
     return (
         <button
-            onClick={() =>
-                setTheme(resolvedTheme === "dark" ? "light" : "dark")
-            }
+            onClick={toggleTheme}
             className="p-2 rounded-full hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
             aria-label="Toggle dark mode"
         >
-            {resolvedTheme === "dark" ? (
-                // Sun icon
+            {theme === "dark" ? (
                 <svg
                     className="w-6 h-6 text-yellow-300"
                     fill="none"
@@ -37,7 +85,6 @@ export default function DarkModeToggle() {
                     />
                 </svg>
             ) : (
-                // Moon icon
                 <svg
                     className="w-6 h-6 text-gray-700"
                     fill="none"

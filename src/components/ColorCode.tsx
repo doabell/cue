@@ -1,5 +1,4 @@
 // components/ColorCode.tsx
-import { firaCode } from "@/app/fonts";
 interface ColorCodeProps {
     value: string;
     label: string;
@@ -20,7 +19,7 @@ export default function ColorCode({
                 type="text"
                 readOnly
                 value={value}
-                className={`${firaCode.className} flex-1 min-w-0 rounded-l-md border border-gray-300 dark:border-gray-600 py-1.5 px-3 text-sm text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700`}
+                className={`font-mono flex-1 min-w-0 rounded-l-md border border-gray-300 dark:border-gray-600 py-1.5 px-3 text-sm text-gray-900 dark:text-white bg-gray-100 dark:bg-gray-700`}
                 aria-label={label}
             />
             <button
