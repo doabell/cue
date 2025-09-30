@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 import { getSeriesList } from "@/lib/jsonParser";
 import { SerializedSeriesInfo } from "@/app/types";
 
+export const runtime = "edge";
+
 export async function GET() {
     try {
         const seriesListRaw = getSeriesList();

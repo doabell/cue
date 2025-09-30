@@ -3,6 +3,8 @@ import { NextResponse } from "next/server";
 import { getSeriesData } from "@/lib/jsonParser";
 import { Color } from "@/app/types";
 
+export const runtime = "edge";
+
 export async function GET(request: Request) {
     try {
         // Extract the slug from the URL
