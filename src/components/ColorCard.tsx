@@ -1,9 +1,6 @@
 // components/ColorCard.tsx
-"use client";
-
 import { useState } from "react";
-import Image from "next/image";
-import { Color } from "@/app/types";
+import type { Color } from "@/lib/types";
 import { hexToRgb, hexToAegisub } from "@/lib/colorUtils";
 import ColorCode from "./ColorCode";
 
@@ -38,12 +35,13 @@ export default function ColorCard({ color }: ColorCardProps) {
                     <div className="flex items-center mb-1">
                         {logo && (
                             <div className="mr-2 flex-shrink-0">
-                                <Image
+                                <img
                                     src={logo}
                                     alt={`${title} logo`}
                                     width={48}
                                     height={48}
                                     className="rounded-full self-center"
+                                    loading="lazy"
                                 />
                             </div>
                         )}
