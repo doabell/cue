@@ -1,6 +1,5 @@
 # CUE!
 
-
 Named after CUE!, a game with 16 characters & colors.
 
 An [Astro](https://astro.build) site that renders static pages and interactive React islands for the color explorer UI.

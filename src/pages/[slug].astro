@@ -2,29 +2,17 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import ColorSeries from "@/components/ColorSeries";
 import { getSeriesData, getSeriesList } from "@/lib/jsonParser";
-import type { Color, SerializedSeriesInfo } from "@/lib/types";
+import type { Color } from "@/lib/types";
 
 export const prerender = true;
 
-export const getStaticPaths = async () => {
-    const seriesList = getSeriesList();
-    return seriesList.map((series) => ({
+export const getStaticPaths = async () =>
+    getSeriesList().map((series) => ({
         params: { slug: series.slug },
     }));
-};
 
 const { slug } = Astro.params;
-
-const seriesListRaw = getSeriesList();
-const seriesList: SerializedSeriesInfo[] = seriesListRaw.map((series) => ({
-    name: series.name,
-    short: series.short,
-    slug: series.slug,
-    logo: series.logo,
-    desc: series.desc,
-}));
-
-const seriesInfo = seriesListRaw.find((series) => series.slug === slug);
+const seriesInfo = getSeriesList().find((series) => series.slug === slug);
 
 if (!seriesInfo) {
     Astro.response.status = 404;
@@ -45,36 +33,34 @@ const seriesData = seriesInfo
       })()
     : null;
 
-const pageTitle = seriesInfo ? `${seriesInfo.short} | CUE!` : "Series Not Found";
+const pageTitle = seriesInfo
+    ? `${seriesInfo.short} colors — CUE!`
+    : "Project not found — CUE!";
 const pageDescription = seriesInfo
-    ? `View and copy ${seriesInfo.name} color palette in various formats`
-    : "We couldn't find that series.";
+    ? `Browse every ${seriesInfo.name} character color in HEX, RGB, and ASS formats.`
+    : "The requested project could not be found.";
 ---
-<BaseLayout
-    seriesList={seriesList}
-    title={pageTitle}
-    description={pageDescription}
-    currentSlug={seriesInfo ? seriesInfo.slug : ""}
->
-    {seriesInfo && seriesData ? (
-        <ColorSeries
-            client:load
-            data={seriesData}
-            name={seriesInfo.name}
-            desc={seriesInfo.desc}
-        />
-    ) : (
-        <section class="py-16 text-center">
-            <h1 class="text-3xl font-bold mb-4">Series Not Found</h1>
-            <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
-                We couldn't find the requested series. Please choose another from the list above.
-            </p>
-            <a
-                href="/"
-                class="inline-block px-6 py-3 bg-gray-900 dark:bg-gray-700 text-white rounded-md hover:bg-gray-700 dark:hover:bg-gray-600 transition-colors"
-            >
-                Return Home
-            </a>
-        </section>
-    )}
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+    {
+        seriesInfo && seriesData ? (
+            <ColorSeries
+                client:load
+                data={seriesData}
+                name={seriesInfo.name}
+                desc={seriesInfo.desc}
+                startDate={seriesInfo.startDate}
+                endDate={seriesInfo.endDate}
+            />
+        ) : (
+            <section class="error-page">
+                <p class="kicker">404</p>
+                <h1>Project not found.</h1>
+                <p>The requested project is not part of this reference.</p>
+                <a class="text-link" href="/">
+                    Return to projects →
+                </a>
+            </section>
+        )
+    }
 </BaseLayout>

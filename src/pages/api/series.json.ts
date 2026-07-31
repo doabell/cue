@@ -10,6 +10,8 @@ const serializeSeriesList = (): SerializedSeriesInfo[] => {
         slug: series.slug,
         logo: series.logo,
         desc: series.desc,
+        startDate: series.startDate,
+        endDate: series.endDate,
     }));
 };
 

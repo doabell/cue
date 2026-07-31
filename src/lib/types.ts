@@ -11,6 +11,8 @@ export interface SeriesInfo {
     slug: string;
     logo?: string;
     desc: string;
+    startDate: string;
+    endDate?: string;
 }
 
 export interface ColorData {
@@ -24,4 +26,6 @@ export type SerializedSeriesInfo = {
     slug: string;
     logo?: string;
     desc: string;
+    startDate: string;
+    endDate?: string;
 };
