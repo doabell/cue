@@ -1,33 +1,42 @@
 ---
 import Navigation from "@/components/Navigation";
-import type { SerializedSeriesInfo } from "@/lib/types";
+import { getSeriesList } from "@/lib/jsonParser";
 import "@/styles/global.css";
 
 interface Props {
     title?: string;
     description?: string;
-    currentSlug?: string;
-    seriesList: SerializedSeriesInfo[];
 }
 
 const {
     title = "CUE!",
-    description = "Display and copy hex colors in various formats",
-    currentSlug = "",
-    seriesList,
+    description = "Display and copy character colors in multiple formats.",
 } = Astro.props as Props;
+
+const projects = getSeriesList();
+const currentSlug = Astro.url.pathname.split("/").filter(Boolean)[0];
+const currentYear = new Date().getFullYear();
+const socialImage = new URL("/og.png", Astro.site ?? Astro.url.origin).href;
 ---
-<html lang="en" class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+
+<html lang="en">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{title}</title>
         <meta name="description" content={description} />
         <meta name="color-scheme" content="light dark" />
-        <link
-            rel="icon"
-            href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎐</text></svg>"
-        />
+        <meta name="theme-color" content="#f5f5f2" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={socialImage} />
+        <meta property="og:image:alt" content="CUE! project color reference" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={socialImage} />
+        <link rel="icon" href="/series/cue.png" />
         <script is:inline>
             const initializeTheme = () => {
                 const storageKey = "theme";
@@ -48,11 +57,6 @@ const {
                                   ? "dark"
                                   : "light";
                         root.classList.add(theme);
-                        if (theme === "dark") {
-                            root.classList.add("dark");
-                        } else {
-                            root.classList.remove("dark");
-                        }
                     } catch {
                         root.classList.add("light");
                     }
@@ -62,14 +66,17 @@ const {
             initializeTheme();
         </script>
     </head>
-    <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
-        <Navigation
-            client:load
-            seriesList={seriesList}
-            currentSlug={currentSlug}
-        />
-        <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <body>
+        <a class="skip-link" href="#main-content">Skip to content</a>
+        <Navigation projects={projects} currentSlug={currentSlug} client:load />
+        <main id="main-content" class="site-main">
             <slot />
         </main>
+        <footer class="site-footer">
+            <div class="footer-inner">
+                <p>CUE! — Project color reference</p>
+                <p>© {currentYear}</p>
+            </div>
+        </footer>
     </body>
 </html>

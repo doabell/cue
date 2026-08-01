@@ -85,6 +85,7 @@ web_modules/
 
 # Astro build output
 dist
+.astro/
 
 # Nuxt.js build / generate output
 .nuxt
